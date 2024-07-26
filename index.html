@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorridos Diarios</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        li a {
+            text-decoration: none;
+            color: #2980b9;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        .dark-theme {
+  background-color: #1c1c1e;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-theme .container {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-theme select,
+.dark-theme button {
+  background-color: #3a3a3c;
+  color: #e0e0e0;
+  border: 1px solid #5e5ce6;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.dark-theme select:hover,
+.dark-theme button:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme li {
+  background-color: #4b4b4d;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s;
+}
+
+.dark-theme li:hover {
+  background-color: #5e5e60;
+}
+
+.dark-theme li a {
+  color: #d1d5db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.dark-theme li a:hover {
+  color: #8a85ff;
+}
+
+.dark-theme h3 {
+  color: #8a85ff;
+  transition: color 0.3s;
+}
+
+.dark-theme p {
+  color: #d1d5db;
+  transition: color 0.3s;
+}
+
+.dark-theme h3:hover,
+.dark-theme p:hover {
+  color: #ffffff;
+}
+
+    </style>
+<script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+    <div class="container">
+        <h1>Rutas Correo Interno (WAZE)</h1>
+        <label for="daySelect">Selecciona el día:</label>
+        <select id="daySelect" onchange="loadRoutes()">
+            <option value="">Selecciona un día</option>
+            <option value="monday">Lunes</option>
+            <option value="tuesday">Martes</option>
+            <option value="wednesday">Miércoles</option>
+            <option value="thursday">Jueves</option>
+            <option value="friday">Viernes</option>
+            <option value="others">Otros Recorridos</option>
+        </select>
+        
+        <label for="routeSelect">Selecciona el recorrido:</label>
+        <select id="routeSelect" onchange="loadPoints()">
+            <option value="">Selecciona un recorrido</option>
+        </select>
+        
+        <ul id="pointsList"></ul>
+        
+        <button onclick="location.href='https://rutacorreointernogmaps.tiiny.site/'" class="button">Cambiar a versión GOOGLE MAPS</button>
+        <button onclick="toggleTheme()">Cambiar Tema</button>
+        <h3>IMPORTANTE!! Vehículo AF709AH Service preventivo próximo 07/08/2024 a las 09:00hs Almirante F.J Seguí 2159- CABA</h3>
+    </div>
+    
+    <script>
+        const routes = {
+            monday: {
+                "Norte 1": [
+                    { name: "E.E La Matanza", link: "waze://?ll=-34.66664476387511,-58.53693367116419&navigate=yes", contact: "123-456-7890", contactName: "Juan Pérez" },
+                    { name: "Región Oeste", link: "waze://?ll=-34.65159587421095,-58.565497317791056&navigate=yes" },
+                    { name: "Devoto", link: "waze://?ll=-34.60360986316583,-58.509929332867266&navigate=yes" },
+                    { name: "Belgrano Comercial", link: "waze://?ll=-34.56953063656913,-58.4362966168707&navigate=yes" },
+                    { name: "Planta San Martín", link: "waze://?ll=-34.558214666561376,-58.42661854625542&navigate=yes", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Planta Depuradora Norte", link: "waze://?ll=-34.47064354111007,-58.585305600000005&navigate=yes" },
+                    { name: "Pozo Norte Lavalle", link: "waze://?ll=-34.44696571580616,-58.55218635337315&navigate=yes" },
+                    { name: "San Isidro", link: "waze://?ll=-34.46399792851425,-58.52423866854047&navigate=yes", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Sur 2": [
+                    { name: "Centro Constitución", link: "waze://?ll=-34.64417655238636,-58.37929082018031&navigate=yes" },
+                    { name: "Avellaneda", link: "waze://?ll=-34.661982716645724,-58.36215521713511&navigate=yes" },
+                    { name: "Est. Wilde", link: "waze://?ll=-34.69764478245508,-58.30998024662638&navigate=yes" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "waze://?ll=-34.69955644137665,-58.2695107288358&navigate=yes", contact: "+5491140751687", contactName: "Claudio Rojas" },
+                    { name: "E.E Lanús", link: "waze://?ll=-34.697760392965456,-58.370269753373144&navigate=yes" },
+                    { name: "Lanús", link: "waze://?ll=-34.71352578897042,-58.3876181743&navigate=yes" },
+                    { name: "Lomas de Zamora", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Regional Sudoeste", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Almirante Brown", link: "waze://?ll=-34.80999146326594,-58.396485611044746&navigate=yes" },
+                    { name: "Pozo Agua Sur", link: "waze://?ll=-34.808807144685844,-58.3969167&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Recorrido Central": [
+                    { name: "Córdoba", link: "waze://?ll=-34.60080482951927,-58.39485968239591&navigate=yes", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Tucumán", link: "waze://?ll=-34.601025242741045,-58.37750301534319&navigate=yes", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ]
+            },
+            tuesday: {
+                "Norte 1": [
+                    { name: "Región Oeste", link: "waze://?ll=-34.65159587421095,-58.565497317791056&navigate=yes" },
+                    { name: "Moron", link: "waze://?ll=-34.651031077092696,-58.603735232722784&navigate=yes" },
+                    { name: "E.E 3 de Febrero", link: "waze://?ll=-34.61504246266973,-58.53595878895604&navigate=yes" },
+                    { name: "Dto 3 de Febrero", link: "waze://?ll=-34.59973384552933,-58.571672064417584&navigate=yes" },
+                    { name: "Dto Devoto", link: "waze://?ll=-34.60360986316583,-58.509929332867266&navigate=yes" },
+                    { name: "Dto San Martin", link: "waze://?ll=-34.57782772944578,-58.544042974219714&navigate=yes" },
+                    { name: "Planta San Martín", link: "waze://?ll=-34.558214666561376,-58.42661854625542&navigate=yes", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Dto Vicente López", link: "waze://?ll=-34.50659579908813,-58.487113782208795&navigate=yes" },
+                    { name: "San Isidro", link: "waze://?ll=-34.46399792851425,-58.52423866854047&navigate=yes", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "San Fernando", link: "waze://?ll=-34.44550361983408,-58.56381364662637&navigate=yes" },
+                    { name: "Tigre Comercial", link: "waze://?ll=-34.42371064085372,-58.57189723371967&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Sur 1": [
+                    { name: "Caballito", link: "waze://?ll=-34.6245129981093,-58.4331648&navigate=yes" },
+                    { name: "E.E Caballito", link: "waze://?ll=-34.62427057803401,-58.43335522329662&navigate=yes" },
+                    { name: "Dto Flores", link: "waze://?ll=-34.624841539392314,-58.46040832722381&navigate=yes" },
+                    { name: "Planta Sudoeste", link: "waze://?ll=-34.716595090981436,-58.50742255760407&navigate=yes" },
+                    { name: "Matanza Sur", link: "waze://?ll=-34.72744623611458,-58.528956106747245&navigate=yes" },
+                    { name: "Luis Guillón", link: "waze://?ll=-34.79665144963824,-58.4591389&navigate=yes", contact: "+5491140264610", contactName: "Damian Robles" },
+                    { name: "9 de Abril", link: "waze://?ll=-34.7816704299071,-58.477955128835184&navigate=yes", contact: "+5491162110104", contactName: "Gabriel Alderete" },
+                    { name: "Planta Olimpo", link: "waze://?ll=-34.74039064888928,-58.49129389325273&navigate=yes", contact: "+5491149767535", contactName: "Nestor Pellegrino" },
+                    { name: "Santa Catalina", link: "waze://?ll=-34.74402709832137,-58.46538085337363&navigate=yes", contact: "+5491140707916", contactName: "Hernan Liva" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ]
+            },
+            wednesday: {
+                "Oeste": [
+                    { name: "Hurlingham Ituzaingó", link: "waze://?ll=-34.62983927154827,-58.65329214353835&navigate=yes" },
+                    { name: "Planta Depuradora Catonas", link: "waze://?ll=-34.61737597181414,-58.72950536441758&navigate=yes", contact: "+5491144775934", contactName: "David Vallejos" },
+                    { name: "Planta Depuradora Hurlingham", link: "waze://?ll=-34.58306892175203,-58.67738451349449&navigate=yes", contact: "+5491140707291", contactName: "Javier Gonzalez" },
+                    { name: "Planta Depuradora Bella Vista", link: "waze://?ll=-34.56838467438064,-58.677000000000014&navigate=yes", contact: "+5491133983088", contactName: "Matias Gonzalez" },
+                    { name: "Dto San Miguel", link: "waze://?ll=-34.54919808444297,-58.7060278&navigate=yes", contact: "+5491151248872", contactName: "Diego Spiazzi" },
+                    { name: "Tanque La Guarida", link: "waze://?ll=-34.572910167580936,-58.7286389&navigate=yes", contact: "+5491161997120", contactName: "Raúl Santillán" },
+                    { name: "Dto Moreno", link: "waze://?ll=-34.64403365033224,-58.79865597116482&navigate=yes" },
+                    { name: "Planta Depuradora Merlo Norte", link: "waze://?ll=-34.6506608568449,-58.73943815767034&navigate=yes", contact: "+5491150217503", contactName: "David Gramajo" },
+                    { name: "Dto Merlo", link: "waze://?ll=-34.66939057887126,-58.71622854232966&navigate=yes" },
+                    { name: "Planta Depuradora Ferrari", link: "waze://?ll=-34.69975818888954,-58.78774195337361&navigate=yes", contact: "+5491163371194", contactName: "Walter Salvador" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Sur 3": [
+                    { name: "Est. Fiorito", link: "waze://?ll=-34.69977115902585,-58.45550000000002&navigate=yes", contact: "+5491132735659", contactName: "Daniel Tarrio" },
+                    { name: "Planta Depuradora Fiorito", link: "waze://?ll=-34.7018628108788,-58.457304622087925&navigate=yes" },
+                    { name: "Planta Depuradora Lanús", link: "waze://?ll=-34.68688472008828,-58.43893635337361&navigate=yes", contact: "63194962", contactName: "Jefe de Planta" },
+                    { name: "Ebc Laferrere", link: "waze://?ll=-34.7387392764005,-58.563301372977875&navigate=yes", contact: "+5491140707907", contactName: "Jefe de Planta" },
+                    { name: "Dto La Matanza Oeste", link: "waze://?ll=-34.786729690349375,-58.62505440933407&navigate=yes", contact: "63195902", contactName: "Omar Mansilla" },
+                    { name: "Pta Virrey del Pino", link: "waze://?ll=-34.85466607369672,-58.67543098895604&navigate=yes", contact: "+5491131725400", contactName: "Victor Roda Da Silva" },
+                    { name: "Planta Depuradora Guernica", link: "waze://?ll=-34.92612601631371,-58.3625859822088&navigate=yes", contact: "+5491122953404", contactName: "Gastón" },
+                    { name: "Dto Pte. Perón", link: "waze://?ll=-34.92491832081597,-58.38171415337363&navigate=yes", contact: "+5491127521194", contactName: "Golan Carbonaro" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Recorrido Central + Sur 4": [
+                    { name: "Córdoba", link: "waze://?ll=-34.60080482951927,-58.39485968239591&navigate=yes", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Tucumán", link: "waze://?ll=-34.601025242741045,-58.37750301534319&navigate=yes", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "SUR 4 (Dejar en POOL de choferes en Planta Manuel Belgrano)", link: "waze://?ll=-34.69955644137665,-58.2695107288358&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ]
+            },
+            thursday: {
+                "Norte 2": [
+                    { name: "Planta Depuradora Champagnat", link: "waze://?ll=-34.446576815646544,-58.920358417791206&navigate=yes" },
+                    { name: "Dto Pilar", link: "waze://?ll=-34.45697140373592,-58.90746147116483&navigate=yes" },
+                    { name: "Planta Depuradora Escobar I", link: "waze://?ll=-34.33221566877753,-58.78524195337363&navigate=yes" },
+                    { name: "Distrito Escobar", link: "waze://?ll=-34.34848904646391,-58.80003852883517&navigate=yes" },
+                    { name: "Planta Juan Manuel de Rosas", link: "waze://?ll=-34.36257678120718,-58.716655971164826&navigate=yes" },
+                    { name: "E. E Villa Adelina", link: "waze://?ll=-34.53179463139189,-58.54120878895603&navigate=yes" },
+                    { name: "E.E Saavedra", link: "waze://?ll=-34.561775492291154,-58.4863970177912&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Sur 2": [
+                    { name: "E.E Paitoví", link: "waze://?ll=-34.625573704024035,-58.39147699567014&navigate=yes" },
+                    { name: "E.E Boca Barracas", link: "waze://?ll=-34.643072892708055,-58.37955926608749&navigate=yes" },
+                    { name: "Centro Constitución", link: "waze://?ll=-34.64417655238636,-58.37929082018031&navigate=yes" },
+                    { name: "Dto Avellaneda", link: "waze://?ll=-34.661982716645724,-58.36215521713511&navigate=yes" },
+                    { name: "Est Wilde", link: "waze://?ll=-34.69764478245508,-58.30998024662638&navigate=yes" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "waze://?ll=-34.69955644137665,-58.2695107288358&navigate=yes", contact: "+5491140751687", contactName: "Claudio Rojas" },
+                    { name: "Lanús", link: "waze://?ll=-34.71352578897042,-58.3876181743&navigate=yes" },
+                    { name: "Lomas de Zamora", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Regional Sudoeste", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Almirante Brown", link: "waze://?ll=-34.80999146326594,-58.396485611044746&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ]
+            },
+            friday: {
+                "Norte 1": [
+                    { name: "Región Oeste", link: "waze://?ll=-34.65159587421095,-58.565497317791056&navigate=yes" },
+                    { name: "Rebombeos Cavassa", link: "waze://?ll=&navigate=yes" },
+                    { name: "Morón", link: "waze://?ll=-34.651031077092696,-58.603735232722784&navigate=yes" },
+                    { name: "Dto 3 de Febrero", link: "waze://?ll=-34.59973384552933,-58.571672064417584&navigate=yes" },
+                    { name: "Dto Devoto", link: "waze://?ll=-34.60360986316583,-58.509929332867266&navigate=yes" },
+                    { name: "Dto San Martín", link: "waze://?ll=-34.57782772944578,-58.544042974219714&navigate=yes" },
+                    { name: "Belgrano Comercial", link: "waze://?ll=-34.56953063656913,-58.4362966168707&navigate=yes" },
+                    { name: "Planta San Martín", link: "waze://?ll=-34.558214666561376,-58.42661854625542&navigate=yes", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Dto Vicente López", link: "waze://?ll=-34.50659579908813,-58.487113782208795&navigate=yes" },
+                    { name: "San Isidro", link: "waze://?ll=-34.46399792851425,-58.52423866854047&navigate=yes", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "San Fernando", link: "waze://?ll=-34.44550361983408,-58.56381364662637&navigate=yes" },
+                    { name: "Tigre Comercial", link: "waze://?ll=-34.42371064085372,-58.57189723371967&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Sur 1": [
+                    { name: "Caballito", link: "waze://?ll=-34.6245129981093,-58.4331648&navigate=yes" },
+                    { name: "Flores", link: "waze://?ll=-34.624841539392314,-58.46040832722381&navigate=yes" },
+                    { name: "E.E Floresta", link: "waze://?ll=-34.6500692130456,-58.47808413799982&navigate=yes" },
+                    { name: "Planta Cildañez", link: "waze://?ll=-34.6549033809105,-58.47610655951652&navigate=yes" },
+                    { name: "Planta Sudoeste", link: "waze://?ll=-34.716595090981436,-58.50742255760407&navigate=yes" },
+                    { name: "Matanza Sur", link: "waze://?ll=-34.72744623611458,-58.528956106747245&navigate=yes" },
+                    { name: "Barrio Uno", link: "waze://?ll=-34.79285282216836,-58.52651609325275&navigate=yes" },
+                    { name: "Planta el Jaguel", link: "waze://?ll=-34.80224740512955,-58.50899463558242&navigate=yes" },
+                    { name: "Tristán Suarez", link: "waze://?ll=-34.897702395844824,-58.56922569624137&navigate=yes" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ],
+                "Recorrido Central": [
+                    { name: "Córdoba", link: "waze://?ll=-34.60080482951927,-58.39485968239591&navigate=yes", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Tucumán", link: "waze://?ll=-34.601025242741045,-58.37750301534319&navigate=yes", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "Retomar al depósito", link: "waze://?ll=-34.64750460982927,-58.44890512879063&navigate=yes" }
+                ]
+            },
+            others: {
+                "Otros Recorridos": [
+                    { name: "Villa Tesei Oeste", link: "waze://?ll=-34.62388170531208,-58.61971147116482&navigate=yes" },
+                    { name: "Planta Depuradora Paso Del Rey", link: "waze://?ll=-34.65369782690538,-58.75280111349449&navigate=yes", contact: "+5491150217516", contactName: "Pablo Nobar" }
+                ]
+            }
+        };
+
+        function loadRoutes() {
+            const daySelect = document.getElementById("daySelect");
+            const routeSelect = document.getElementById("routeSelect");
+            routeSelect.innerHTML = '<option value="">Selecciona un recorrido</option>';
+
+            const selectedDay = daySelect.value;
+            if (selectedDay && routes[selectedDay]) {
+                Object.keys(routes[selectedDay]).forEach(route => {
+                    const option = document.createElement("option");
+                    option.value = route;
+                    option.textContent = route;
+                    routeSelect.appendChild(option);
+                });
+            }
+        }
+
+        function loadPoints() {
+    const day = document.getElementById('daySelect').value;
+    const route = document.getElementById('routeSelect').value;
+    const pointsList = document.getElementById('pointsList');
+    pointsList.innerHTML = '';
+    if (routes[day] && routes[day][route]) {
+        routes[day][route].forEach(point => {
+            const listItem = document.createElement('li');
+            
+            const link = document.createElement('a');
+            link.href = point.link;
+            link.textContent = point.name;
+            listItem.appendChild(link);
+            
+            const contactDiv = document.createElement('div');
+            contactDiv.style.marginTop = '5px'; // Opcional: añade un margen entre el punto y los datos de contacto
+
+            const contactName = document.createElement('div');
+            contactName.textContent = `Nombre de Contacto: ${point.contactName}`;
+            contactDiv.appendChild(contactName);
+
+            const contactLink = document.createElement('a');
+            contactLink.href = `tel:${point.contact}`;
+            contactLink.textContent = `Tel: ${point.contact}`;
+            contactLink.style.textDecoration = 'underline'; // Opcional: añade subrayado al enlace del número
+            contactDiv.appendChild(contactLink);
+
+            listItem.appendChild(contactDiv);
+            pointsList.appendChild(listItem);
+        });
+    }
+
+}
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark-theme");
+        }
+    </script>
+</body>
+</html>
