@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -52,28 +52,86 @@
             text-decoration: underline;
         }
         .dark-theme {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-        }
-        .dark-theme .container {
-            background-color: #eb9a04;
-        }
-        .dark-theme select, .dark-theme button {
-            background-color: #34495e;
-            color: #ecf0f1;
-            border: 1px solid #2c3e50;
-        }
-        .dark-theme li {
-            background-color: #3b5998;
-        }
-        .dark-theme li a {
-            color: #ecf0f1;
-        }
+  background-color: #1c1c1e;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-theme .container {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-theme select,
+.dark-theme button {
+  background-color: #3a3a3c;
+  color: #e0e0e0;
+  border: 1px solid #5e5ce6;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.dark-theme select:hover,
+.dark-theme button:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme li {
+  background-color: #4b4b4d;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s;
+}
+
+.dark-theme li:hover {
+  background-color: #5e5e60;
+}
+
+.dark-theme li a {
+  color: #d1d5db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.dark-theme li a:hover {
+  color: #8a85ff;
+}
+
+.dark-theme h3 {
+  color: #8a85ff;
+  transition: color 0.3s;
+}
+
+.dark-theme p {
+  color: #d1d5db;
+  transition: color 0.3s;
+}
+
+.dark-theme h3:hover,
+.dark-theme p:hover {
+  color: #ffffff;
+}
+        .dark-theme a {
+  color: #ffffff;
+  transition: color 0.3s;
+}
+
     </style>
-<script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script><script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
 <body>
     <div class="container">
-        <h1>Rutas Correo Interno</h1>
+        <img src="https://www.aysa.com.ar/media-library/imagenes_inicio/logo.png" alt="Logo" style="display: block; margin: 0 auto; width: 60px; height: auto;">
+        <h1>Rutas Correo Interno (Google Maps)</h1>
         <label for="daySelect">Selecciona el día:</label>
         <select id="daySelect" onchange="loadRoutes()">
             <option value="">Selecciona un día</option>
@@ -92,152 +150,170 @@
         
         <ul id="pointsList"></ul>
         
-        <button onclick="toggleTheme()">Cambiar Tema</button>
+        <button onclick="location.href='https://rutacorreointernogmaps.tiiny.site/'" class="button">Cambiar a versión GOOGLE MAPS</button>
+        <p><b>IMPORTANTE!!</b> Vehículo AF709AH Service preventivo próximo 07/08/2024 a las 09:00hs Almirante F.J Seguí 2159- CABA. <a href="https://maps.app.goo.gl/ehmEqwhTsfZipzYL9">Ver en el mapa</a></p>
     </div>
     
     <script>
         const routes = {
             monday: {
-                "Norte 1": [
-                    { name: "E.E La Matanza", link: "waze://?ll=-34.66664476387511,-58.53693367116419&navigate=yes" },
-                    { name: "Región Oeste", link: "waze://?ll=-34.65159587421095,-58.565497317791056&navigate=yes" },
-                    { name: "Devoto", link: "waze://?ll=-34.60360986316583,-58.509929332867266&navigate=yes" },
-                    { name: "Belgrano Comercial", link: "waze://?ll=-34.56953063656913,-58.4362966168707&navigate=yes" },
-                    { name: "Planta San Martín", link: "waze://?ll=-34.558214666561376,-58.42661854625542&navigate=yes" },
-                    { name: "Planta Depuradora Norte", link: "waze://?ll=-34.47064354111007,-58.585305600000005&navigate=yes" },
-                    { name: "Pozo Norte Lavalle", link: "waze://?ll=-34.44696571580616,-58.55218635337315&navigate=yes" },
-                    { name: "San Isidro", link: "waze://?ll=-34.46399792851425,-58.52423866854047&navigate=yes" }
+                 "Norte 1": [
+                    { name: "Dto Vicente López", link: "https://maps.app.goo.gl/eeq8y1aCo93Gaf738" },
+                    { name: "San Isidro", link: "https://maps.app.goo.gl/akWV3gnJL54op6i7A", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "San Fernando", link: "https://maps.app.goo.gl/K338boamLFhkqJsdA" },
+                    { name: "Tigre Comercial", link: "https://maps.app.goo.gl/uBoGidi6xRE15nuMA" },
+                    { name: "Dto San Martin", link: "https://maps.app.goo.gl/6GJrKFoEmjEpVqkH6" },
+                    { name: "Dto 3 de Febrero", link: "https://maps.app.goo.gl/N2et52hN7WRoWD7F7" }, 
+                    { name: "E.E 3 de Febrero", link: "https://maps.app.goo.gl/vCPrXyJQ8EXCpM4d7" },
+                    { name: "Moron", link: "https://maps.app.goo.gl/nA9sHPPvX833mNyU8" },
+                    { name: "Región Oeste", link: "https://maps.app.goo.gl/wKuTmrHmmwVaS72i6" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Sur 2": [
-                    { name: "Centro Constitución", link: "waze://?ll=-34.64417655238636,-58.37929082018031&navigate=yes" },
-                    { name: "Avellaneda", link: "waze://?ll=-34.661982716645724,-58.36215521713511&navigate=yes" },
-                    { name: "Est. Wilde", link: "waze://?ll=-34.69766462947662,-58.3099668355821&navigate=yes" },
-                    { name: "Planta Manuel Belgrano Bernal", link: "waze://?ll=-34.69955644137665,-58.2695107288358&navigate=yes" },
-                    { name: "E.E Lanús", link: "waze://?ll=-34.697760392965456,-58.370269753373144&navigate=yes" },
-                    { name: "Lanús", link: "waze://?ll=-34.712889139772514,-58.387547553373146&navigate=yes" },
-                    { name: "Lomas de Zamora", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
-                    { name: "Regional Sudoeste", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
-                    { name: "Almirante Brown", link: "waze://?ll=-34.80999146326594,-58.396485611044746&navigate=yes" },
-                    { name: "Pozo Agua Sur", link: "waze://?ll=-34.808807144685844,-58.3969167&navigate=yes" }
+                    { name: "Centro Constitución", link: "https://maps.app.goo.gl/J7WixdB2ybohvVsd7" },
+                    { name: "Avellaneda", link: "https://maps.app.goo.gl/LfsjPZn4ef6682w98" },
+                    { name: "Est. Wilde", link: "https://maps.app.goo.gl/p6z7L11S2P3XmzKV6" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "https://maps.app.goo.gl/csxdeGXkQSCvUnHJ7", contact: "+5491140751687", contactName: "Claudio Rojas" },
+                    { name: "E.E Lanús", link: "https://maps.app.goo.gl/397MokyuKnpcVJbT9" },
+                    { name: "Lanús", link: "https://maps.app.goo.gl/SQxRghpMeoZLC6DH7" },
+                    { name: "Lomas de Zamora", link: "https://maps.app.goo.gl/obySMFpEmSpFcjZ38", contact: "+5491154044236", contactName: "Walter Nemmi"  },
+                    { name: "Regional Sudoeste", link: "https://maps.app.goo.gl/obySMFpEmSpFcjZ38" },
+                    { name: "Almirante Brown", link: "https://maps.app.goo.gl/r4pA8cSZ3C9vnB978" },
+                    { name: "Pozo Agua Sur", link: "https://maps.app.goo.gl/6AmNk8bdYPmk3n4K6" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Recorrido Central": [
-                    { name: "Córdoba", link: "waze://?ll=-34.60080482951927,-58.39485968239591&navigate=yes" },
-                    { name: "Tucumán", link: "waze://?ll=-34.601025242741045,-58.37750301534319&navigate=yes" }
+                    { name: "Tucumán", link: "https://maps.app.goo.gl/2J2MJ4BSGKF2xsVP8", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "Córdoba", link: "https://maps.app.goo.gl/qCPkHFhveDg5hk4bA", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Planta San Martín", link: "https://maps.app.goo.gl/NXcZDJizh5JyKxcg8", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Devoto", link: "https://maps.app.goo.gl/iNgKaCvg9Jk1Z2qK8" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ]
             },
             tuesday: {
-                "Norte 1": [
-                    { name: "Región Oeste", link: "https://maps.app.goo.gl/KhRAZbPA8v6pou4e9" },
-                    { name: "Moron", link: "https://goo.gl/maps/QRK3vhxXmH82" },
-                    { name: "E.E 3 de Febrero", link: "https://goo.gl/maps/RA8MUdcbnpB2" },
-                    { name: "Dto 3 de Febrero", link: "https://goo.gl/maps/wpkyhMGuxYP2" },
-                    { name: "Dto Devoto", link: "https://maps.app.goo.gl/jEQpu9BbaXdV42W2A" },
-                    { name: "Dto San Martin", link: "https://goo.gl/maps/WD4wsyhNZT32" },
-                    { name: "Planta San Martón", link: "https://maps.app.goo.gl/2dKNm2jD6Ju5aA9C8" },
-                    { name: "Dto Vicente López", link: "https://goo.gl/maps/SgJsG8spKzu" },
-                    { name: "San Isidro", link: "https://maps.app.goo.gl/gyEp4xbRTruCSXmU7" },
-                    { name: "San Fernando", link: "https://goo.gl/maps/xjxhot6Yszt" },
-                    { name: "Tigre Comercial", link: "https://goo.gl/maps/ihqZkMusSorXNEaw9" }
-                ],
                 "Sur 1": [
-                    { name: "Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
-                    { name: "E.E Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
-                    { name: "Dto Flores", link: "https://goo.gl/maps/UmSgFU2zd2E2" },
-                    { name: "Planta Sudoeste", link: "https://goo.gl/maps/p4CmWc9i57x" },
-                    { name: "Matanza Sur", link: "https://goo.gl/maps/mQq5sdL5kZo" },
-                    { name: "Luis Guillón", link: "https://goo.gl/maps/hUiayDBuTiQ2" },
-                    { name: "9 de Abril", link: "https://goo.gl/maps/wnEKW3ZvFwq" },
-                    { name: "Planta Olimpo", link: "https://goo.gl/maps/WJ9niRpnJvT2" },
-                    { name: "Santa Catalina", link: "https://goo.gl/maps/ceq5qUzbmkp" }
-                ]
+                    { name: "Caballito", link: "https://maps.app.goo.gl/fgXYwuczr5xFQ9Lc8" },
+                    { name: "E.E Caballito", link: "https://maps.app.goo.gl/vuNKDrPXaYLvB85YA" },
+                    { name: "Dto Flores", link: "https://maps.app.goo.gl/gCYq6BBNCi4Xny916" },
+                    { name: "Planta Sudoeste", link: "https://maps.app.goo.gl/6d5kC1k2C3DgcQzW9" },
+                    { name: "Matanza Sur", link: "https://maps.app.goo.gl/KBwqQwiGSLRLViZh9" },
+                    { name: "Luis Guillón", link: "https://maps.app.goo.gl/pnziff8dmRKwZgQp9", contact: "+5491140264610", contactName: "Damian Robles" },
+                    { name: "9 de Abril", link: "https://maps.app.goo.gl/YDy91bV7ZpcDJtau9", contact: "+5491162110104", contactName: "Gabriel Alderete" },
+                    { name: "Planta Olimpo", link: "https://maps.app.goo.gl/SYb3vPWtHuQmuQDJA", contact: "+5491149767535", contactName: "Nestor Pellegrino" },
+                    { name: "Santa Catalina", link: "https://maps.app.goo.gl/rjy8SVHNM1QQMWBn6", contact: "+5491140707916", contactName: "Hernan Liva" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
+                ],
+                "Sur 3": [
+                    { name: "Planta Depuradora Lanús", link: "https://maps.app.goo.gl/DVUkHPsXZcP4Nx3e9", contact: "63194962", contactName: "Jefe de Planta" },
+                    { name: "Est. Fiorito", link: "https://maps.app.goo.gl/FwFtbN4pf89rEhyRA", contact: "+5491132735659", contactName: "Daniel Tarrio" },
+                    { name: "Planta Depuradora Fiorito", link: "https://maps.app.goo.gl/FwFtbN4pf89rEhyRA" },
+                    { name: "Ebc Laferrere", link: "https://maps.app.goo.gl/JKD3RNu7pbkFNaan8", contact: "+5491140707907", contactName: "Jefe de Planta" },
+                    { name: "Dto La Matanza Oeste", link: "https://maps.app.goo.gl/NpQ7dFAzTeHdhLVy9", contact: "63195902", contactName: "Omar Mansilla" },
+                    { name: "Pta Virrey del Pino", link: "https://maps.app.goo.gl/zKSghX3yhVryYunb6", contact: "+5491131725400", contactName: "Victor Roda Da Silva" },
+                    { name: "Planta Depuradora Guernica", link: "https://maps.app.goo.gl/2F1hdX2NCSERr7Ag6", contact: "+5491122953404", contactName: "Gastón" },
+                    { name: "Dto Pte. Perón", link: "https://maps.app.goo.gl/Kfr9qyXXrA654Zh87", contact: "+5491127521194", contactName: "Golan Carbonaro" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
+               ]
             },
             wednesday: {
                 "Oeste": [
-                    { name: "Hurlingham Ituzaingó", link: "https://goo.gl/maps/cDge4ySVVGv" },
-                    { name: "Planta Depuradora Catonas", link: "https://goo.gl/maps/RJScJFYeczw" },
-                    { name: "Planta Depuradora Hurlingham", link: "https://goo.gl/maps/Gqx66fRawo22" },
-                    { name: "Planta Depuradora Bella Vista", link: "https://goo.gl/maps/mkAbwNp6dCw" },
-                    { name: "Dto San Miguel", link: "https://goo.gl/maps/TwmLn4EbpCx" },
-                    { name: "Tanque La Guarida", link: "https://goo.gl/maps/bFtHjLG61pqALube7" },
-                    { name: "Dto Moreno", link: "https://goo.gl/maps/NfqqQoU7Ynz" },
-                    { name: "Planta Depuradora Merlo Norte", link: "https://goo.gl/maps/b9oeCs8jXmN2" },
-                    { name: "Dto Merlo", link: "https://goo.gl/maps/134kFF56pBt" },
-                    { name: "Planta Depuradora Ferrari", link: "https://goo.gl/maps/fGEL5uWuErT2" }
+                    { name: "Hurlingham Ituzaingó", link: "https://maps.app.goo.gl/1EkZy2BC6NideKWw5" },
+                    { name: "Planta Depuradora Catonas", link: "https://maps.app.goo.gl/NCYRxrwuUVpvnqAr8", contact: "+5491144775934", contactName: "David Vallejos" },
+                    { name: "Planta Depuradora Hurlingham", link: "https://maps.app.goo.gl/rV1AyGGPKjCvcFB6A", contact: "+5491140707291", contactName: "Javier Gonzalez" },
+                    { name: "Planta Depuradora Bella Vista", link: "https://maps.app.goo.gl/3QGbKF5kRPr2UMXJ6", contact: "+5491133983088", contactName: "Matias Gonzalez" },
+                    { name: "Dto San Miguel", link: "https://maps.app.goo.gl/rPKH8Ru14Begbb7eA", contact: "+5491151248872", contactName: "Diego Spiazzi" },
+                    { name: "Tanque La Guarida", link: "https://maps.app.goo.gl/jFjPcsyc41K2YP3r6", contact: "+5491161997120", contactName: "Raúl Santillán" },
+                    { name: "Dto Moreno", link: "https://maps.app.goo.gl/ANF7WvcUEsZT8AwZ7" },
+                    { name: "Planta Depuradora Merlo Norte", link: "https://maps.app.goo.gl/2gg11jywVhBuDvCy5", contact: "+5491150217503", contactName: "David Gramajo" },
+                    { name: "Dto Merlo", link: "https://maps.app.goo.gl/K9v4cZFNr8ZEQe8w8" },
+                    { name: "Planta Depuradora Ferrari", link: "https://maps.app.goo.gl/5pdTfMVGcHDkAgmN7", contact: "+5491163371194", contactName: "Walter Salvador" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
-                "Sur 3": [
-                    { name: "Est. Fiorito", link: "https://goo.gl/maps/gDUtMpyMysj" },
-                    { name: "Planta Depuradora Fiorito", link: "https://goo.gl/maps/MgckFMKojxwuuB3L9" },
-                    { name: "Planta Depuradora Lanús", link: "https://goo.gl/maps/m5BhiC8VbLp" },
-                    { name: "Ebc Laferrere", link: "https://goo.gl/maps/3PqphCGeYuC2" },
-                    { name: "Dto La Matanza Oeste", link: "https://goo.gl/maps/u56UZQMZvro" },
-                    { name: "Pta Virrey del Pino", link: "https://goo.gl/maps/fyJdiUP75Q82" },
-                    { name: "Planta Depuradora Guernica", link: "https://goo.gl/maps/FqUCqyzE2fM2" },
-                    { name: "Dto Pte. Perón", link: "https://maps.app.goo.gl/N9e8Nw6PF2tjf2Rb7" }
+                "Norte 1": [
+                    { name: "Dto Vicente López", link: "https://maps.app.goo.gl/eeq8y1aCo93Gaf738" },        
+                    { name: "San Isidro", link: "https://maps.app.goo.gl/akWV3gnJL54op6i7A", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "Pozo Norte Lavalle", link: "https://maps.app.goo.gl/8p3uAnzDcgMvcCfE6" },
+                    { name: "San Fernando", link: "https://maps.app.goo.gl/K338boamLFhkqJsdA" },
+                    { name: "Planta Depuradora Norte", link: "https://maps.app.goo.gl/jThs8AYAQDK28KkC9" },
+                    { name: "Dto San Martín", link: "https://maps.app.goo.gl/6GJrKFoEmjEpVqkH6" },
+                    { name: "Dto 3 de Febrero", link: "https://maps.app.goo.gl/N2et52hN7WRoWD7F7" },
+                    { name: "Morón", link: "https://maps.app.goo.gl/nA9sHPPvX833mNyU8" },
+                    { name: "Región Oeste", link: "https://maps.app.goo.gl/wKuTmrHmmwVaS72i6" },
+                    { name: "E.E La Matanza", link: "https://maps.app.goo.gl/Y5mX3H2y2NdQigcr9", contact: "123-456-7890", contactName: "Juan Pérez" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Recorrido Central + Sur 4": [
-                    { name: "Córdoba", link: "https://maps.app.goo.gl/p3npHXot6L7nENZ3A" },
-                    { name: "Tucumán", link: "https://maps.app.goo.gl/cGYrPJ6XpaumRU5P6" },
-                    { name: "SUR 4 (Dejar en POOL de choferes en Planta Manuel Belgrano)", link: "https://maps.app.goo.gl/HQ7zjtW37dPRV7iL6" }
+                    { name: "Tucumán", link: "https://maps.app.goo.gl/2J2MJ4BSGKF2xsVP8", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "Córdoba", link: "https://maps.app.goo.gl/qCPkHFhveDg5hk4bA", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Planta San Martín", link: "https://maps.app.goo.gl/NXcZDJizh5JyKxcg8", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Belgrano Técnica", link: "https://maps.app.goo.gl/sBUYkeM8MX3x2a2R7" },
+                    { name: "Devoto", link: "https://maps.app.goo.gl/iNgKaCvg9Jk1Z2qK8" },            
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ]
             },
             thursday: {
                 "Norte 2": [
-                    { name: "Planta Depuradora Champagnat", link: "https://goo.gl/maps/NqagdrvuRD22" },
-                    { name: "Dto Pilar", link: "https://goo.gl/maps/5YFgSUoApU22" },
-                    { name: "Planta Depuradora Escobar I", link: "https://goo.gl/maps/qEcoLm8WsZG2" },
-                    { name: "Distrito Escobar", link: "https://goo.gl/maps/PnTjhYX4nz62" },
-                    { name: "Planta Juan Manuel de Rosas", link: "https://goo.gl/maps/o6wNnkf9wvJ2" },
-                    { name: "E. E Villa Adelina", link: "https://goo.gl/maps/6vyFFZqYN2eYVco68" },
-                    { name: "E.E Saavedra", link: "https://goo.gl/maps/VMV7iAAocw42" }
+                    { name: "E.E Saavedra", link: "https://maps.app.goo.gl/2jFmJ7LB3NTDpfrB8" },
+                    { name: "E. E Villa Adelina", link: "https://maps.app.goo.gl/7x4pdQBLapPiXqeB9" },                 
+                    { name: "Planta Juan Manuel de Rosas", link: "https://maps.app.goo.gl/69iVvWY4TUDeUJSJA" },
+                    { name: "Distrito Escobar", link: "https://maps.app.goo.gl/Y9ojsRRQHwBdRWxg9" },
+                    { name: "Planta Depuradora Escobar I", link: "https://maps.app.goo.gl/cVrf7dZVDeNCQj68A" },
+                    { name: "Dto Pilar", link: "https://maps.app.goo.gl/VTDJ2FdpWEqXi6ZV8" },
+                    { name: "Planta Depuradora Champagnat", link: "https://maps.app.goo.gl/YP3Ss5xkEN2oEbkz9" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Sur 2": [
-                    { name: "E.E Paitoví", link: "https://goo.gl/maps/AMJ1PLgnp6z" },
-                    { name: "E.E Boca Barracas", link: "https://goo.gl/maps/hSXAimu6Qmy" },
-                    { name: "Centro Constitución", link: "https://maps.app.goo.gl/2fZh13r1S121gBbN7" },
-                    { name: "Dto Avellaneda", link: "https://maps.app.goo.gl/iRY6QX7zgyb8b9eP8" },
-                    { name: "Est Wilde", link: "https://goo.gl/maps/dSRWXSkKxA42" },
-                    { name: "Planta Manuel Belgrano Bernal", link: "https://maps.app.goo.gl/HQ7zjtW37dPRV7iL6" },
-                    { name: "Lanús", link: "https://maps.app.goo.gl/eu4aFGmMTH8qgkeA6" },
-                    { name: "Lomas de Zamora", link: "https://maps.app.goo.gl/XALgoB5mxzeJNYxk9" },
-                    { name: "Regional Sudoeste", link: "https://maps.app.goo.gl/XALgoB5mxzeJNYxk9" },
-                    { name: "Almirante Brown", link: "https://maps.app.goo.gl/XdJk2j4GnEE41gyD6" }
+                    { name: "E.E Paitoví", link: "https://maps.app.goo.gl/WYXkFJkcPBN2sAYD7" },
+                    { name: "E.E Boca Barracas", link: "https://maps.app.goo.gl/N8VHRNzWXxEf1Hxs8", contact: "+5491158821074", contactName: "Gaston Censabella" },
+                    { name: "Centro Constitución", link: "https://maps.app.goo.gl/J7WixdB2ybohvVsd7" },
+                    { name: "Dto Avellaneda", link: "https://maps.app.goo.gl/LfsjPZn4ef6682w98" },
+                    { name: "Est Wilde", link: "https://maps.app.goo.gl/p6z7L11S2P3XmzKV6" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "https://maps.app.goo.gl/csxdeGXkQSCvUnHJ7", contact: "+5491140751687", contactName: "Claudio Rojas" },
+                    { name: "Lanús", link: "https://maps.app.goo.gl/SQxRghpMeoZLC6DH7" },
+                    { name: "Lomas de Zamora", link: "https://maps.app.goo.gl/obySMFpEmSpFcjZ38", contact: "+5491154044236", contactName: "Walter Nemmi" },
+                    { name: "Regional Sudoeste", link: "https://maps.app.goo.gl/obySMFpEmSpFcjZ38" },
+                    { name: "Almirante Brown", link: "https://maps.app.goo.gl/r4pA8cSZ3C9vnB978" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ]
             },
             friday: {
                 "Norte 1": [
-                    { name: "Región Oeste", link: "https://maps.app.goo.gl/KhRAZbPA8v6pou4e9" },
-                    { name: "Rebombeos Cavassa", link: "https://goo.gl/maps/cz9wzAdZAFL2" },
-                    { name: "Morón", link: "https://goo.gl/maps/QRK3vhxXmH82" },
-                    { name: "Dto 3 de Febrero", link: "https://goo.gl/maps/wpkyhMGuxYP2" },
-                    { name: "Dto Devoto", link: "https://maps.app.goo.gl/jEQpu9BbaXdV42W2A" },
-                    { name: "Dto San Martín", link: "https://goo.gl/maps/WD4wsyhNZT32" },
-                    { name: "Belgrano Comercial", link: "https://maps.app.goo.gl/6sVdqbh4EwSGaG4E8" },
-                    { name: "Planta San Martín", link: "https://maps.app.goo.gl/2dKNm2jD6Ju5aA9C8" },
-                    { name: "Dto Vicente López", link: "https://goo.gl/maps/SgJsG8spKzu" },
-                    { name: "San Isidro", link: "https://maps.app.goo.gl/gyEp4xbRTruCSXmU7" },
-                    { name: "San Fernando", link: "https://goo.gl/maps/xjxhot6Yszt" },
-                    { name: "Tigre Comercial", link: "https://goo.gl/maps/ihqZkMusSorXNEaw9" }
+                    { name: "Dto Vicente López", link: "https://maps.app.goo.gl/eeq8y1aCo93Gaf738" },
+                    { name: "San Isidro", link: "https://maps.app.goo.gl/akWV3gnJL54op6i7A", contact: "+5491140751682", contactName: "Diego Montagano" },
+                    { name: "San Fernando", link: "https://maps.app.goo.gl/K338boamLFhkqJsdA" },
+                    { name: "Tigre Comercial", link: "https://maps.app.goo.gl/uBoGidi6xRE15nuMA" },
+                    { name: "Dto San Martín", link: "https://maps.app.goo.gl/6GJrKFoEmjEpVqkH6" },
+                    { name: "Dto 3 de Febrero", link: "https://maps.app.goo.gl/N2et52hN7WRoWD7F7" },
+                    { name: "Rebombeos Cavassa", link: "https://maps.app.goo.gl/3YxfjWfMNWU2xUFk6" },
+                    { name: "Morón", link: "https://maps.app.goo.gl/nA9sHPPvX833mNyU8" },
+                    { name: "Región Oeste", link: "https://maps.app.goo.gl/wKuTmrHmmwVaS72i6" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Sur 1": [
-                    { name: "Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
-                    { name: "Flores", link: "https://goo.gl/maps/UmSgFU2zd2E2" },
-                    { name: "E.E Floresta", link: "https://goo.gl/maps/56EjhKNkFty" },
-                    { name: "Planta Cildañez", link: "https://goo.gl/maps/y4JEsbB7g8t" },
-                    { name: "Planta Sudoeste", link: "https://goo.gl/maps/p4CmWc9i57x" },
-                    { name: "Matanza Sur", link: "https://goo.gl/maps/mQq5sdL5kZo" },
-                    { name: "Barrio Uno", link: "https://goo.gl/maps/JhWmtnG564WK2FdRA" },
-                    { name: "Planta el Jaguel", link: "https://goo.gl/maps/5xg6exSe9ER2" },
-                    { name: "Tristán Suarez", link: "https://goo.gl/maps/YUA1c7Acnw6oAjnn6" }
+                    { name: "Caballito", link: "https://maps.app.goo.gl/fgXYwuczr5xFQ9Lc8" },
+                    { name: "Flores", link: "https://maps.app.goo.gl/gCYq6BBNCi4Xny916" },
+                    { name: "E.E Floresta", link: "https://maps.app.goo.gl/qdsMucAdEsQ26JJX9", contact: "+5491140708216", contactName: "Guardia E.E Floresta" },
+                    { name: "Planta Cildañez", link: "https://maps.app.goo.gl/pziA8B53DkPZeGD8A", contact: "63194440", contactName: "Cildañez"  },
+                    { name: "Planta Sudoeste", link: "https://maps.app.goo.gl/6d5kC1k2C3DgcQzW9" },
+                    { name: "Matanza Sur", link: "https://maps.app.goo.gl/KBwqQwiGSLRLViZh9" },
+                    { name: "Barrio Uno", link: "https://maps.app.goo.gl/eKsgqgtZxTjYagUA6" },
+                    { name: "Planta el Jaguel", link: "https://maps.app.goo.gl/UKWTL9ZNM7qTCAcKA", contact: "+5491154028335", contactName: "Alejandro Rual"  },
+                    { name: "Tristán Suarez", link: "https://maps.app.goo.gl/jednXsCD4FvD4tyq5" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ],
                 "Recorrido Central": [
-                    { name: "Córdoba", link: "https://maps.app.goo.gl/p3npHXot6L7nENZ3A" },
-                    { name: "Tucumán", link: "https://maps.app.goo.gl/cGYrPJ6XpaumRU5P6" }
+                    { name: "Tucumán", link: "https://maps.app.goo.gl/2J2MJ4BSGKF2xsVP8", contact: "+5491167333720", contactName: "Carlos Altamirano" },
+                    { name: "Córdoba", link: "https://maps.app.goo.gl/qCPkHFhveDg5hk4bA", contact: "+5491128646631", contactName: "Guido Freire" },
+                    { name: "Planta San Martín", link: "https://maps.app.goo.gl/NXcZDJizh5JyKxcg8", contact: "+5491140705297", contactName: "Christian Arnal" },
+                    { name: "Belgrano Comercial", link: "https://maps.app.goo.gl/mABexmBkNrcgoztZ7" },
+                    { name: "Dto Devoto", link: "https://maps.app.goo.gl/iNgKaCvg9Jk1Z2qK8" },
+                    { name: "Retomar al depósito", link: "https://maps.app.goo.gl/kJBUtJiu6iZ4Rw937" }
                 ]
             },
             others: {
                 "Otros Recorridos": [
-                    { name: "Villa Tesei Oeste", link: "https://goo.gl/maps/ivXVXtAsZESSCnxy6" },
-                    { name: "Planta Depuradora Paso Del Rey", link: "https://goo.gl/maps/gLRdyq7MVVt" }
+                    { name: "Villa Tesei Oeste", link: "https://maps.app.goo.gl/fbpRbEsv3wcfTHY16" },
+                    { name: "Planta Depuradora Paso Del Rey", link: "https://maps.app.goo.gl/B2nVySRBTHNqa2vL8", contact: "+5491150217516", contactName: "Pablo Nobar" }
                 ]
             }
         };
@@ -259,25 +335,38 @@
         }
 
         function loadPoints() {
-            const daySelect = document.getElementById("daySelect");
-            const routeSelect = document.getElementById("routeSelect");
-            const pointsList = document.getElementById("pointsList");
-            pointsList.innerHTML = "";
+    const day = document.getElementById('daySelect').value;
+    const route = document.getElementById('routeSelect').value;
+    const pointsList = document.getElementById('pointsList');
+    pointsList.innerHTML = '';
+    if (routes[day] && routes[day][route]) {
+        routes[day][route].forEach(point => {
+            const listItem = document.createElement('li');
+            
+            const link = document.createElement('a');
+            link.href = point.link;
+            link.textContent = point.name;
+            listItem.appendChild(link);
+            
+            const contactDiv = document.createElement('div');
+            contactDiv.style.marginTop = '5px'; // Opcional: añade un margen entre el punto y los datos de contacto
 
-            const selectedDay = daySelect.value;
-            const selectedRoute = routeSelect.value;
-            if (selectedDay && selectedRoute && routes[selectedDay][selectedRoute]) {
-                routes[selectedDay][selectedRoute].forEach(point => {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.href = point.link;
-                    a.textContent = point.name;
-                    a.target = "_blank";
-                    li.appendChild(a);
-                    pointsList.appendChild(li);
-                });
-            }
-        }
+            const contactName = document.createElement('div');
+            contactName.textContent = `Nombre de Contacto: ${point.contactName}`;
+            contactDiv.appendChild(contactName);
+
+            const contactLink = document.createElement('a');
+            contactLink.href = `tel:${point.contact}`;
+            contactLink.textContent = `Tel: ${point.contact}`;
+            contactLink.style.textDecoration = 'underline'; // Opcional: añade subrayado al enlace del número
+            contactDiv.appendChild(contactLink);
+
+            listItem.appendChild(contactDiv);
+            pointsList.appendChild(listItem);
+        });
+    }
+
+}
 
         function toggleTheme() {
             document.body.classList.toggle("dark-theme");
