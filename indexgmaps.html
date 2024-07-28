@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorridos Diarios</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        li a {
+            text-decoration: none;
+            color: #2980b9;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        .dark-theme {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        .dark-theme .container {
+            background-color: #eb9a04;
+        }
+        .dark-theme select, .dark-theme button {
+            background-color: #34495e;
+            color: #ecf0f1;
+            border: 1px solid #2c3e50;
+        }
+        .dark-theme li {
+            background-color: #3b5998;
+        }
+        .dark-theme li a {
+            color: #ecf0f1;
+        }
+    </style>
+<script defer data-domain="rutacorreointerno.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+    <div class="container">
+        <h1>Rutas Correo Interno</h1>
+        <label for="daySelect">Selecciona el día:</label>
+        <select id="daySelect" onchange="loadRoutes()">
+            <option value="">Selecciona un día</option>
+            <option value="monday">Lunes</option>
+            <option value="tuesday">Martes</option>
+            <option value="wednesday">Miércoles</option>
+            <option value="thursday">Jueves</option>
+            <option value="friday">Viernes</option>
+            <option value="others">Otros Recorridos</option>
+        </select>
+        
+        <label for="routeSelect">Selecciona el recorrido:</label>
+        <select id="routeSelect" onchange="loadPoints()">
+            <option value="">Selecciona un recorrido</option>
+        </select>
+        
+        <ul id="pointsList"></ul>
+        
+        <button onclick="toggleTheme()">Cambiar Tema</button>
+    </div>
+    
+    <script>
+        const routes = {
+            monday: {
+                "Norte 1": [
+                    { name: "E.E La Matanza", link: "waze://?ll=-34.66664476387511,-58.53693367116419&navigate=yes" },
+                    { name: "Región Oeste", link: "waze://?ll=-34.65159587421095,-58.565497317791056&navigate=yes" },
+                    { name: "Devoto", link: "waze://?ll=-34.60360986316583,-58.509929332867266&navigate=yes" },
+                    { name: "Belgrano Comercial", link: "waze://?ll=-34.56953063656913,-58.4362966168707&navigate=yes" },
+                    { name: "Planta San Martín", link: "waze://?ll=-34.558214666561376,-58.42661854625542&navigate=yes" },
+                    { name: "Planta Depuradora Norte", link: "waze://?ll=-34.47064354111007,-58.585305600000005&navigate=yes" },
+                    { name: "Pozo Norte Lavalle", link: "waze://?ll=-34.44696571580616,-58.55218635337315&navigate=yes" },
+                    { name: "San Isidro", link: "waze://?ll=-34.46399792851425,-58.52423866854047&navigate=yes" }
+                ],
+                "Sur 2": [
+                    { name: "Centro Constitución", link: "waze://?ll=-34.64417655238636,-58.37929082018031&navigate=yes" },
+                    { name: "Avellaneda", link: "waze://?ll=-34.661982716645724,-58.36215521713511&navigate=yes" },
+                    { name: "Est. Wilde", link: "waze://?ll=-34.69766462947662,-58.3099668355821&navigate=yes" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "waze://?ll=-34.69955644137665,-58.2695107288358&navigate=yes" },
+                    { name: "E.E Lanús", link: "waze://?ll=-34.697760392965456,-58.370269753373144&navigate=yes" },
+                    { name: "Lanús", link: "waze://?ll=-34.712889139772514,-58.387547553373146&navigate=yes" },
+                    { name: "Lomas de Zamora", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Regional Sudoeste", link: "waze://?ll=-34.76804033473896,-58.404083299999996&navigate=yes" },
+                    { name: "Almirante Brown", link: "waze://?ll=-34.80999146326594,-58.396485611044746&navigate=yes" },
+                    { name: "Pozo Agua Sur", link: "waze://?ll=-34.808807144685844,-58.3969167&navigate=yes" }
+                ],
+                "Recorrido Central": [
+                    { name: "Córdoba", link: "waze://?ll=-34.60080482951927,-58.39485968239591&navigate=yes" },
+                    { name: "Tucumán", link: "waze://?ll=-34.601025242741045,-58.37750301534319&navigate=yes" }
+                ]
+            },
+            tuesday: {
+                "Norte 1": [
+                    { name: "Región Oeste", link: "https://maps.app.goo.gl/KhRAZbPA8v6pou4e9" },
+                    { name: "Moron", link: "https://goo.gl/maps/QRK3vhxXmH82" },
+                    { name: "E.E 3 de Febrero", link: "https://goo.gl/maps/RA8MUdcbnpB2" },
+                    { name: "Dto 3 de Febrero", link: "https://goo.gl/maps/wpkyhMGuxYP2" },
+                    { name: "Dto Devoto", link: "https://maps.app.goo.gl/jEQpu9BbaXdV42W2A" },
+                    { name: "Dto San Martin", link: "https://goo.gl/maps/WD4wsyhNZT32" },
+                    { name: "Planta San Martón", link: "https://maps.app.goo.gl/2dKNm2jD6Ju5aA9C8" },
+                    { name: "Dto Vicente López", link: "https://goo.gl/maps/SgJsG8spKzu" },
+                    { name: "San Isidro", link: "https://maps.app.goo.gl/gyEp4xbRTruCSXmU7" },
+                    { name: "San Fernando", link: "https://goo.gl/maps/xjxhot6Yszt" },
+                    { name: "Tigre Comercial", link: "https://goo.gl/maps/ihqZkMusSorXNEaw9" }
+                ],
+                "Sur 1": [
+                    { name: "Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
+                    { name: "E.E Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
+                    { name: "Dto Flores", link: "https://goo.gl/maps/UmSgFU2zd2E2" },
+                    { name: "Planta Sudoeste", link: "https://goo.gl/maps/p4CmWc9i57x" },
+                    { name: "Matanza Sur", link: "https://goo.gl/maps/mQq5sdL5kZo" },
+                    { name: "Luis Guillón", link: "https://goo.gl/maps/hUiayDBuTiQ2" },
+                    { name: "9 de Abril", link: "https://goo.gl/maps/wnEKW3ZvFwq" },
+                    { name: "Planta Olimpo", link: "https://goo.gl/maps/WJ9niRpnJvT2" },
+                    { name: "Santa Catalina", link: "https://goo.gl/maps/ceq5qUzbmkp" }
+                ]
+            },
+            wednesday: {
+                "Oeste": [
+                    { name: "Hurlingham Ituzaingó", link: "https://goo.gl/maps/cDge4ySVVGv" },
+                    { name: "Planta Depuradora Catonas", link: "https://goo.gl/maps/RJScJFYeczw" },
+                    { name: "Planta Depuradora Hurlingham", link: "https://goo.gl/maps/Gqx66fRawo22" },
+                    { name: "Planta Depuradora Bella Vista", link: "https://goo.gl/maps/mkAbwNp6dCw" },
+                    { name: "Dto San Miguel", link: "https://goo.gl/maps/TwmLn4EbpCx" },
+                    { name: "Tanque La Guarida", link: "https://goo.gl/maps/bFtHjLG61pqALube7" },
+                    { name: "Dto Moreno", link: "https://goo.gl/maps/NfqqQoU7Ynz" },
+                    { name: "Planta Depuradora Merlo Norte", link: "https://goo.gl/maps/b9oeCs8jXmN2" },
+                    { name: "Dto Merlo", link: "https://goo.gl/maps/134kFF56pBt" },
+                    { name: "Planta Depuradora Ferrari", link: "https://goo.gl/maps/fGEL5uWuErT2" }
+                ],
+                "Sur 3": [
+                    { name: "Est. Fiorito", link: "https://goo.gl/maps/gDUtMpyMysj" },
+                    { name: "Planta Depuradora Fiorito", link: "https://goo.gl/maps/MgckFMKojxwuuB3L9" },
+                    { name: "Planta Depuradora Lanús", link: "https://goo.gl/maps/m5BhiC8VbLp" },
+                    { name: "Ebc Laferrere", link: "https://goo.gl/maps/3PqphCGeYuC2" },
+                    { name: "Dto La Matanza Oeste", link: "https://goo.gl/maps/u56UZQMZvro" },
+                    { name: "Pta Virrey del Pino", link: "https://goo.gl/maps/fyJdiUP75Q82" },
+                    { name: "Planta Depuradora Guernica", link: "https://goo.gl/maps/FqUCqyzE2fM2" },
+                    { name: "Dto Pte. Perón", link: "https://maps.app.goo.gl/N9e8Nw6PF2tjf2Rb7" }
+                ],
+                "Recorrido Central + Sur 4": [
+                    { name: "Córdoba", link: "https://maps.app.goo.gl/p3npHXot6L7nENZ3A" },
+                    { name: "Tucumán", link: "https://maps.app.goo.gl/cGYrPJ6XpaumRU5P6" },
+                    { name: "SUR 4 (Dejar en POOL de choferes en Planta Manuel Belgrano)", link: "https://maps.app.goo.gl/HQ7zjtW37dPRV7iL6" }
+                ]
+            },
+            thursday: {
+                "Norte 2": [
+                    { name: "Planta Depuradora Champagnat", link: "https://goo.gl/maps/NqagdrvuRD22" },
+                    { name: "Dto Pilar", link: "https://goo.gl/maps/5YFgSUoApU22" },
+                    { name: "Planta Depuradora Escobar I", link: "https://goo.gl/maps/qEcoLm8WsZG2" },
+                    { name: "Distrito Escobar", link: "https://goo.gl/maps/PnTjhYX4nz62" },
+                    { name: "Planta Juan Manuel de Rosas", link: "https://goo.gl/maps/o6wNnkf9wvJ2" },
+                    { name: "E. E Villa Adelina", link: "https://goo.gl/maps/6vyFFZqYN2eYVco68" },
+                    { name: "E.E Saavedra", link: "https://goo.gl/maps/VMV7iAAocw42" }
+                ],
+                "Sur 2": [
+                    { name: "E.E Paitoví", link: "https://goo.gl/maps/AMJ1PLgnp6z" },
+                    { name: "E.E Boca Barracas", link: "https://goo.gl/maps/hSXAimu6Qmy" },
+                    { name: "Centro Constitución", link: "https://maps.app.goo.gl/2fZh13r1S121gBbN7" },
+                    { name: "Dto Avellaneda", link: "https://maps.app.goo.gl/iRY6QX7zgyb8b9eP8" },
+                    { name: "Est Wilde", link: "https://goo.gl/maps/dSRWXSkKxA42" },
+                    { name: "Planta Manuel Belgrano Bernal", link: "https://maps.app.goo.gl/HQ7zjtW37dPRV7iL6" },
+                    { name: "Lanús", link: "https://maps.app.goo.gl/eu4aFGmMTH8qgkeA6" },
+                    { name: "Lomas de Zamora", link: "https://maps.app.goo.gl/XALgoB5mxzeJNYxk9" },
+                    { name: "Regional Sudoeste", link: "https://maps.app.goo.gl/XALgoB5mxzeJNYxk9" },
+                    { name: "Almirante Brown", link: "https://maps.app.goo.gl/XdJk2j4GnEE41gyD6" }
+                ]
+            },
+            friday: {
+                "Norte 1": [
+                    { name: "Región Oeste", link: "https://maps.app.goo.gl/KhRAZbPA8v6pou4e9" },
+                    { name: "Rebombeos Cavassa", link: "https://goo.gl/maps/cz9wzAdZAFL2" },
+                    { name: "Morón", link: "https://goo.gl/maps/QRK3vhxXmH82" },
+                    { name: "Dto 3 de Febrero", link: "https://goo.gl/maps/wpkyhMGuxYP2" },
+                    { name: "Dto Devoto", link: "https://maps.app.goo.gl/jEQpu9BbaXdV42W2A" },
+                    { name: "Dto San Martín", link: "https://goo.gl/maps/WD4wsyhNZT32" },
+                    { name: "Belgrano Comercial", link: "https://maps.app.goo.gl/6sVdqbh4EwSGaG4E8" },
+                    { name: "Planta San Martín", link: "https://maps.app.goo.gl/2dKNm2jD6Ju5aA9C8" },
+                    { name: "Dto Vicente López", link: "https://goo.gl/maps/SgJsG8spKzu" },
+                    { name: "San Isidro", link: "https://maps.app.goo.gl/gyEp4xbRTruCSXmU7" },
+                    { name: "San Fernando", link: "https://goo.gl/maps/xjxhot6Yszt" },
+                    { name: "Tigre Comercial", link: "https://goo.gl/maps/ihqZkMusSorXNEaw9" }
+                ],
+                "Sur 1": [
+                    { name: "Caballito", link: "https://goo.gl/maps/t6k55P7Fgcz" },
+                    { name: "Flores", link: "https://goo.gl/maps/UmSgFU2zd2E2" },
+                    { name: "E.E Floresta", link: "https://goo.gl/maps/56EjhKNkFty" },
+                    { name: "Planta Cildañez", link: "https://goo.gl/maps/y4JEsbB7g8t" },
+                    { name: "Planta Sudoeste", link: "https://goo.gl/maps/p4CmWc9i57x" },
+                    { name: "Matanza Sur", link: "https://goo.gl/maps/mQq5sdL5kZo" },
+                    { name: "Barrio Uno", link: "https://goo.gl/maps/JhWmtnG564WK2FdRA" },
+                    { name: "Planta el Jaguel", link: "https://goo.gl/maps/5xg6exSe9ER2" },
+                    { name: "Tristán Suarez", link: "https://goo.gl/maps/YUA1c7Acnw6oAjnn6" }
+                ],
+                "Recorrido Central": [
+                    { name: "Córdoba", link: "https://maps.app.goo.gl/p3npHXot6L7nENZ3A" },
+                    { name: "Tucumán", link: "https://maps.app.goo.gl/cGYrPJ6XpaumRU5P6" }
+                ]
+            },
+            others: {
+                "Otros Recorridos": [
+                    { name: "Villa Tesei Oeste", link: "https://goo.gl/maps/ivXVXtAsZESSCnxy6" },
+                    { name: "Planta Depuradora Paso Del Rey", link: "https://goo.gl/maps/gLRdyq7MVVt" }
+                ]
+            }
+        };
+
+        function loadRoutes() {
+            const daySelect = document.getElementById("daySelect");
+            const routeSelect = document.getElementById("routeSelect");
+            routeSelect.innerHTML = '<option value="">Selecciona un recorrido</option>';
+
+            const selectedDay = daySelect.value;
+            if (selectedDay && routes[selectedDay]) {
+                Object.keys(routes[selectedDay]).forEach(route => {
+                    const option = document.createElement("option");
+                    option.value = route;
+                    option.textContent = route;
+                    routeSelect.appendChild(option);
+                });
+            }
+        }
+
+        function loadPoints() {
+            const daySelect = document.getElementById("daySelect");
+            const routeSelect = document.getElementById("routeSelect");
+            const pointsList = document.getElementById("pointsList");
+            pointsList.innerHTML = "";
+
+            const selectedDay = daySelect.value;
+            const selectedRoute = routeSelect.value;
+            if (selectedDay && selectedRoute && routes[selectedDay][selectedRoute]) {
+                routes[selectedDay][selectedRoute].forEach(point => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = point.link;
+                    a.textContent = point.name;
+                    a.target = "_blank";
+                    li.appendChild(a);
+                    pointsList.appendChild(li);
+                });
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark-theme");
+        }
+    </script>
+</body>
+</html>
