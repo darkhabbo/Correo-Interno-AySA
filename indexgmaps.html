@@ -346,7 +346,9 @@
             const link = document.createElement('a');
             link.href = point.link;
             link.textContent = point.name;
-            link.style.fontWeight = 'bold';
+            link.style.fontWeight = 'bold'; // Para poner en negrita
+            link.style.display = 'block'; // Convertir el enlace en un bloque
+            link.style.textAlign = 'center'; // Centrar el texto
             listItem.appendChild(link);
             
             const contactDiv = document.createElement('div');
