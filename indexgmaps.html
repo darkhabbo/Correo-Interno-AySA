@@ -354,15 +354,23 @@
             const contactDiv = document.createElement('div');
             contactDiv.style.marginTop = '5px'; // Opcional: añade un margen entre el punto y los datos de contacto
 
-            const contactName = document.createElement('div');
-            contactName.textContent = `Nombre de Contacto: ${point.contactName}`;
-            contactDiv.appendChild(contactName);
+// Añadir estilos para centrar el contenido dentro de contactDiv
+           contactDiv.style.display = 'flex';
+           contactDiv.style.flexDirection = 'column';
+           contactDiv.style.alignItems = 'center'; // Centrar los elementos horizontalmente
 
-            const contactLink = document.createElement('a');
-            contactLink.href = `tel:${point.contact}`;
-            contactLink.textContent = `Tel: ${point.contact}`;
-            contactLink.style.textDecoration = 'underline'; // Opcional: añade subrayado al enlace del número
-            contactDiv.appendChild(contactLink);
+           const contactName = document.createElement('div');
+           contactName.textContent = `Nombre de Contacto: ${point.contactName}`;
+           contactDiv.appendChild(contactName);
+
+           const contactLink = document.createElement('a');
+           contactLink.href = `tel:${point.contact}`;
+           contactLink.textContent = `Tel: ${point.contact}`;
+           contactLink.style.textDecoration = 'underline'; // Opcional: añade subrayado al enlace del número
+           contactDiv.appendChild(contactLink);
+
+// Añadir contactDiv a su contenedor principal
+           listItem.appendChild(contactDiv);
 
             listItem.appendChild(contactDiv);
             pointsList.appendChild(listItem);
